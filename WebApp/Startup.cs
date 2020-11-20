@@ -37,7 +37,7 @@ namespace WebApp
             .AddRazorPagesOptions(options =>
             {
                 options.Conventions.AuthorizeAreaFolder("user","/");
-                options.Conventions.AuthorizeAreaFolder("admin", "/", "RequireAdminRole");
+                options.Conventions.AuthorizeAreaFolder("admin", "/");
             });
         }
 
