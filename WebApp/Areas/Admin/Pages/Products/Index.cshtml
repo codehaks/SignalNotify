@@ -2,3 +2,25 @@
 @model WebApp.Areas.Admin.Pages.Products.IndexModel
 @{
 }
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Active</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model.ProductList)
+        {
+            <tr>
+                <td>@product.Name</td>
+                <td>@product.Price</td>
+                <td>@product.IsActive</td>
+            </tr>
+        }
+
+    </tbody>
+
+</table>
