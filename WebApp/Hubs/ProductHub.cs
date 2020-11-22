@@ -3,16 +3,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApp.Models;
 
 namespace WebApp.Hubs
 {
     public class ProductHub : Hub
     {
-        public async Task SendCoord(int x, int y)
+        public void NotifyOthers(Product product)
         {
-            await Clients.All.SendAsync("ReceiveCoord", x, y);
+            Clients.Others.SendAsync("UpdateProduct", product);
         }
 
-      
+
     }
 }
