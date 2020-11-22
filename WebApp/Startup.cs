@@ -30,13 +30,18 @@ namespace WebApp
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddDatabaseDeveloperPageExceptionFilter();
+
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddControllers();
+
             services.AddRazorPages()
             .AddRazorPagesOptions(options =>
             {
-                options.Conventions.AuthorizeAreaFolder("user","/");
+                options.Conventions.AuthorizeAreaFolder("user", "/");
                 options.Conventions.AuthorizeAreaFolder("admin", "/");
             });
         }
@@ -66,6 +71,7 @@ namespace WebApp
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllers();
                 endpoints.MapRazorPages();
             });
         }
