@@ -4,7 +4,47 @@
 }
 
 <h1>Shop</h1>
+<hr />
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Active</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model.ProductList)
+        {
+            <tr>
+                <td>@product.Name</td>
+                <td>@product.Price</td>
+                <td>@product.IsActive</td>
+                <td>
+                    <a asp-page="edit" class="btn btn-primary" asp-route-id="@product.Id">Edit</a>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+
+</table>
 
 @section scripts{
-    <script></script>
-} 
+    <script>
+        var connection = new signalR.HubConnectionBuilder().withUrl("/producthub").build();
+
+        connection.on("UpdateProduct", function (product) {
+            console.log(product);
+            toastr.success(product.name + " updated!");
+        });
+
+        connection.start().then(function () {
+            console.log("Connection started");
+        }).catch(function (err) {
+            return console.error(err.toString());
+        });
+
+    </script>
+}
