@@ -1,14 +1,15 @@
 ﻿@page
-@model WebApp.Areas.User.Pages.Products.EditModel
+@model WebApp.Areas.Admin.Pages.Products.EditModel
 @{
 }
+
 <h1>Edit</h1>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form method="post" class="p-3" asp-page="/products/create" asp-area="user">
+        <form method="post" class="p-3" asp-page="/products/edit" asp-area="admin">
 
-            <input asp-for="Product.Id" hidden />
+            <input asp-for="Product.Id"  />
 
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 

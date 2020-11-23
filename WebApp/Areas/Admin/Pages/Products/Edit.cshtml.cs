@@ -4,11 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using WebApp.Common.Extentions;
 using WebApp.Data;
 using WebApp.Models;
 
-namespace WebApp.Areas.User.Pages.Products
+namespace WebApp.Areas.Admin.Pages.Products
 {
     public class EditModel : PageModel
     {
@@ -18,13 +17,6 @@ namespace WebApp.Areas.User.Pages.Products
         {
             _db = db;
         }
-
-        public IActionResult OnGet(int id)
-        {
-            Product = _db.Products.Find(id);
-            return Page();
-        }
-
         [BindProperty]
         public Product Product { get; set; }
 
@@ -32,12 +24,17 @@ namespace WebApp.Areas.User.Pages.Products
         {
             var product = _db.Products.Find(Product.Id);
 
+            //product.Id = Product.Id;
             product.IsActive = Product.IsActive;
             product.Price = Product.Price;
 
             _db.SaveChanges();
-
             return RedirectToPage("/products/index");
+        }
+
+        public void OnGet(int id)
+        {
+            Product = _db.Products.Find(id);
         }
     }
 }
