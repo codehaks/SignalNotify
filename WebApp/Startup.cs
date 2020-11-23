@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebApp.Data;
+using WebApp.Hubs;
 
 namespace WebApp
 {
@@ -37,6 +38,8 @@ namespace WebApp
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddControllers();
+
+            services.AddSignalR();
 
             services.AddRazorPages()
             .AddRazorPagesOptions(options =>
@@ -73,6 +76,8 @@ namespace WebApp
             {
                 endpoints.MapControllers();
                 endpoints.MapRazorPages();
+                endpoints.MapHub<ProductHub>("/producthub");
+
             });
         }
     }

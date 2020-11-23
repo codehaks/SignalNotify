@@ -29,3 +29,21 @@
     </tbody>
 
 </table>
+
+@section scripts{
+    <script>
+        var connection = new signalR.HubConnectionBuilder().withUrl("/producthub").build();
+
+        connection.on("UpdateProduct", function (product) {
+            console.log(product);
+            toastr.success(product.name + " updated!");
+        });
+
+        connection.start().then(function () {
+            console.log("Connection started");
+        }).catch(function (err) {
+            return console.error(err.toString());
+        });
+
+    </script>
+}
