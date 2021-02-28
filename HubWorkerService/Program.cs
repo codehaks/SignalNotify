@@ -18,6 +18,7 @@ namespace HubWorkerService
             Host.CreateDefaultBuilder(args)
                 .ConfigureServices((hostContext, services) =>
                 {
+                    services.AddSignalR();
                     services.AddHostedService<Worker>();
                 });
     }
